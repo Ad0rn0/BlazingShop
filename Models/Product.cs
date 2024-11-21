@@ -1,25 +1,26 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace BlazingShop.Models;
 
 public class Product
 {
-    public Product()
-    {
-    }
+    [Key]
+    [Required(ErrorMessage = "Product Id is required")]
     public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string Description { get; set; } = null!;
-    public string Image { get; set; } = null!;
-    public decimal Price { get; set; }
-    public int CategoryId { get; set; }
-    public Category Category { get; set; } = new();
 
-    public Product(int id, string name, string description, string image, decimal price, int categoryId)
-    {
-        Id = id;
-        Name = name;
-        Description = description;
-        Image = image;
-        Price = price;
-        CategoryId = categoryId;
-    }
+    [Required(ErrorMessage = "Product Name is required")]
+    [MaxLength(50, ErrorMessage = "Product Name cannot be longer than 50 characters")]
+    [MinLength(5, ErrorMessage = "Product Name cannot be less than 5 characters")]
+    public string Title { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "Product Description is required")]
+    [DataType(DataType.Currency)]
+    [Range(0, 9999, ErrorMessage = "Product Price must be between 0 and 9999")]
+    public decimal Price { get; set; }
+
+    [Required(ErrorMessage = "Category is required")]
+    [Range(1, 9999, ErrorMessage = "Category must be between 1 and 9999")]
+    public int CategoryId { get; set; }
+
+    public Category Category { get; set; } = null!;
 }
