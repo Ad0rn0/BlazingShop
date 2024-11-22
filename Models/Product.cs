@@ -15,7 +15,7 @@ public class Product
 
     [Required(ErrorMessage = "Product Description is required")]
     [DataType(DataType.Currency)]
-    [Range(0, 9999, ErrorMessage = "Product Price must be between 0 and 9999")]
+    [Range(1, 9999, ErrorMessage = "Product Price must be between 1 and 9999")]
     public decimal Price { get; set; }
 
     [Required(ErrorMessage = "Category is required")]
